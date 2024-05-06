@@ -54,10 +54,10 @@ void drawRightTriangle(char ch)
 	for (char stable = 'a'; stable <= ch; stable++) 
 	{
     //char ch是使用者輸入的字母，
-    //就是三角形底邊的最右邊那個字母    
+    //就是三角形底邊的最左邊的"a"    
+    //stable: 固定的，
     
-    //stable: 固定的 就是代表三角形第一排"a"這個字母，
-    
+
 		for (char space = ch; space > stable; space--) 
 		{
             //複習
@@ -76,18 +76,24 @@ void drawRightTriangle(char ch)
             //判斷字元b大於a，輸出一個空格，然後字元減一變成a
             //判斷字元a不大於a，所以不輸出空格
             //放字元的位置由下一個for迴圈將字元填入
-            //
+        
             printf(" ");
             //先打印出空格，以將字母向右對齊
     	}
     // 從 (ch - (temp - 'a')) 開始打印字母直到 ch
     //因為temp -'a' 得出了從 a 到 temp 的字母數量。 
     
-		for (char i = ch - ( - 'a'); i <= ch; i++) 
+		for (char i = ch - ( stable- 'a'); i <= ch; i++) 
 		{
-    //char i; i 從 ch - (temp - 'a') 開始，一直遞增到 ch。
-	//(char i = ch - (temp - 'a')用來打印每行的字元，
-	//從計算得出的起始字元到 ch。
+    
+    //一樣用ch = c舉例,
+    //char i = ch - ( stable- 'a')
+    //意思是第二輪開始(第二行)，i等於c減掉(b-a)，
+    //等於c這個字元-1，等於b
+    //所以第二行用b當開頭
+    //然後判斷b小於等於c，
+    //i++就是b++得到c
+    // 所以第
 	// 決定了每行應該從哪個字元開始打印。
 	    	printf("%c", i);
     	}		
