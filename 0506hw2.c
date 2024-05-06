@@ -257,8 +257,9 @@ int main() {
 				scanf("%c", &ch);
                 if(ch == 'a')
 				{
-					printf("畫不出三角形，如下圖所示 ，只有一個 a 阿!!!!! \n"); 
+					printf("畫不出正常的三角形，如下圖所示 ，只有一個 a 阿!!!!! \n"); 
 					drawRightTriangle(ch);
+					//把ch這個變數丟給畫三角形的函數
 				}
 				else
 				{
@@ -275,7 +276,8 @@ int main() {
                 printf("請輸入一個1至9的整數：");
                 fflush(stdin);
                 scanf("%d", &n);
-                drawMultiplicationTable(n);
+                drawMultiplicationTable(n); 
+				//把n丟給九九乘法表的函數
                 break;
             }
             case 'c':
@@ -298,7 +300,8 @@ int main() {
         				fflush(stdin);
 						scanf("%c", &choice);
         				break;
-        				//這樣寫才能讓程式讀取到選單的選擇，
+        				//break;
+						//這樣寫才能讓程式讀取到選單的選擇，
 						//不然會卡在switch迴圈裏面 
 					} 
 					else
@@ -311,7 +314,7 @@ int main() {
 				{
 					do
 					{
-						//當輸入的字源不是這四個指定字元，
+						//當輸入的字母不是這四個指定字元，
 						//就重複要求輸入，直到使用者輸入正確 
 						fflush(stdin);
 						printf("請輸入符合要求的答案\n");
@@ -324,7 +327,7 @@ int main() {
 				}
 				
 				//以下須注意
-				//這樣會直接結束程式 
+				//這樣會直接結束程式，不符要求 
 				/*
 				if (confirm == 'n' || confirm == 'N') 
 				{
@@ -342,6 +345,22 @@ int main() {
     } while (choice != 'c' && choice != 'C'); 
 	//當使用者輸入的字元不是c也不是C，就重複迴圈 
 
-    return 0;
+    return 0;//程式結束
 }
+
+//1.這次為了更了解迴圈，
+//所以試著詳細的解釋畫三角形的過程，
+//也藉此訓練我的邏輯，
+//畫流程圖的時候也會比較得心應手
+
+//2.這次也更了解函數的意義，
+//對函數及主程式的關係與使用方法更加熟練
+//也更了解自己的邏輯能力
+
+//3.最難也是這次收穫最多的部分，
+//我想是稍微了解github的應用方式，
+//這部份很感謝助教的幫忙
+//最後為了方便寫程式，又再學會使用VScode。
+
+
 
