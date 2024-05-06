@@ -27,8 +27,11 @@ void drawRightTriangle(char ch)
     //設定一個函數用來畫向右對齊的三角形
     if (ch < 'a' || ch > 'n') 
 	{
-    //ch: 用戶輸入的最後一個字母，
+    //判斷用戶輸入的字母有沒有在範圍內
+    //ch: 用戶輸入的字母，
 	//確定了三角形的高度和最寬的一行的字母數。
+    //因為如果輸入c，那他是由a數到c第三個字母，
+    //所以高度和三角形底邊會分別為三個字元的高度及寬度
 	 
 		do
         {
@@ -55,11 +58,13 @@ void drawRightTriangle(char ch)
 	{
     //char ch是使用者輸入的字母，
     //就是三角形底邊的最左邊的"a"    
-    //stable: 固定的，
+    //stable: 固定的
     
 
 		for (char space = ch; space > stable; space--) 
 		{
+            //用來打印空格
+            
             //複習
             //for迴圈的運算式會在整個大括號的最後執行
 
@@ -85,16 +90,15 @@ void drawRightTriangle(char ch)
     
 		for (char i = ch - ( stable- 'a'); i <= ch; i++) 
 		{
-    
-    //一樣用ch = c舉例,
-    //char i = ch - ( stable- 'a')
-    //意思是第二輪開始(第二行)，i等於c減掉(b-a)，
-    //等於c這個字元-1，等於b
-    //所以第二行用b當開頭
-    //然後判斷b小於等於c，
-    //i++就是b++得到c
-    // 所以第
-	// 決定了每行應該從哪個字元開始打印。
+        //用來打印字母
+        //char i 
+        //一樣用ch = c舉例,
+        //char i = ch - ( stable- 'a')
+        //第一輪i等於c - (a-a)，char i也等於c
+        //所以第一行唯一一個字母也是第一個字母，就是c
+        //第二輪，c = c-(b-a)
+        //
+
 	    	printf("%c", i);
     	}		
     printf("\n");
