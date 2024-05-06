@@ -69,7 +69,7 @@ void drawRightTriangle(char ch)
             //for迴圈的運算式會在整個大括號的最後執行
 
             //char space = ch意思是:
-            //假設要輸出的是這個
+            //假設要輸出的是下面這個
             //  c
             // bc
             //abc
@@ -85,8 +85,7 @@ void drawRightTriangle(char ch)
             printf(" ");
             //先打印出空格，以將字母向右對齊
     	}
-    // 從 (ch - (temp - 'a')) 開始打印字母直到 ch
-    //因為temp -'a' 得出了從 a 到 temp 的字母數量。 
+ 
     
 		for (char i = ch - ( stable- 'a'); i <= ch; i++) 
 		{
