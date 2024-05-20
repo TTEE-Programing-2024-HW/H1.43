@@ -134,3 +134,26 @@ int main()
 
     return 0;
 }
+
+int checkPassword()
+{
+    int password, attempts = 0, correctPassword = 2024;
+    // First question
+    printf("This is the welcome screen, this is an owl\n");
+    printf("                           .__.\n");
+    printf("                          (o,o)\n");
+    printf("                         -|=|-\n");
+    printf("                        __|__\n");
+    printf("                     // ' ' \\\\\n");
+    printf("                  _ //   ^   \\\\\n");
+    printf("                 / \\(  '  '  )//\n");
+    printf("                /  / \\(-----)/ \\  \\\n");
+    printf("                | |   (:| |:)   | |\n");
+    printf("                | |    || ||    | |\n");
+    printf("                | |    () ()    | |\n");
+    printf("                | |    || ||    | |\n");
+    printf("               /  \\   || ||   /  \\\n");
+    printf("              /    \\  || ||  /    \\\n");
+    printf("             /  /\\  \\=====/ /\\  \\ \\\n");
+    printf("            /__/  \\__|___|__/  \\__\\\n");
+    printf("           |_______________________|\n");
