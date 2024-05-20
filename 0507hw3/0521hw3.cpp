@@ -30,3 +30,21 @@ void acceptSuggestedSeats(int seats[ROWS][COLS]);      // Accept seats (after ma
 int findFourSeats(int seats[ROWS][COLS]);
 // Open the seat selection function after user clicks auto-select
 // (because the logic for selecting four seats is different from general seat selection logic, mainly in the arrangement)
+
+int main()
+{
+    int seats[ROWS][COLS]; // Set up a 9x9 seat map
+    char choice; // Set 'choice' as the character input by the user after viewing the menu
+    int keepRunning = 1; // See the comments in the switch function for case 'd'
+
+    if (checkPassword()) // After entering the if-else function, immediately check if the password is correct. If correct, enter the main code
+    {
+        initializeSeats(seats); // Initialize the seat map
+        do
+        {
+            menu(); // Display a personalized welcome screen
+            fflush(stdin); // Clear the buffer, system("cls"); clears the screen
+            scanf(" %c", &choice); // Read the user's menu selection
+            choice = tolower(choice); 
+            //0516 Need to look up the definition of tolower() function 
+            //tolower() function converts uppercase letters to lowercase directly, so no need to write four more lines for 'case 'A'' in case
