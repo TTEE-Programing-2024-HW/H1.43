@@ -74,10 +74,10 @@ int checkPassword()
 {
     int password;               // 儲存使用者輸入的密碼
     int correctpassword = 2024; // 儲存正確密碼
-    int count = 1;              // 儲存錯誤次數
-    // 錯誤次數預設1，因為第一次被呼叫的時候，
-    //就不用再多一個count = count + 1;的步驟
-    //
+    int count = 0;              // 儲存錯誤次數
+    // 本來錯誤次數預設1，第一次被呼叫的時候，
+    //就不用再多一個count = count + 1;的步驟。 
+    //但使用do-while會出問題 
 
     printf("請輸入密碼：\n");
     scanf("%d", &password);
@@ -98,11 +98,23 @@ int checkPassword()
     {
         do
         {
-        	printf("密碼輸入錯誤達%d次",count);
+        	count++; 
+			//錯誤次數要放在迴圈的一開始，
+			//才能即時知道錯了幾次 
+			if(count >= 3 || count == 3)
+			{
+				//如果錯誤次數大於3或等於3，
+				//就離開迴圈關閉程式
+				printf("密碼輸入錯誤達%d次，關閉程式",count);
+				return 1; //利用return結束程式 
+			}
+			 //錯誤次數加一 
+			printf("密碼輸入錯誤達%d次",count);
         	printf("請重新輸入密碼：\n");
     		scanf("%d", &password);
-
-		}while(password != correctpassword);
+			
+		}while(password != correctpassword); 
+        //當密碼依舊錯誤，就繼續讓使用者重新輸入
     
     }
 }
