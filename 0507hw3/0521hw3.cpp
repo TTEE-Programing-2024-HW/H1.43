@@ -335,6 +335,8 @@ int findFourSeats(int seats[ROWS][COLS])
         {
             if (seats[i][j] == 0 && seats[i][j + 1] == 0 && seats[i][j + 2] == 0 && seats[i][j + 3] == 0)
             {
+                //檢查有沒有連續的四個空座位
+                //Check if there are four consecutive empty seats
                 for (int k = 0; k < 4; k++)
                 {
                     seats[i][j + k] = 2;
