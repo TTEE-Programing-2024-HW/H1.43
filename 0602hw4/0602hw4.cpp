@@ -1,8 +1,13 @@
 //H1.43®}ºû§¡ HW4
+#include<stdio.h>
+#include<stdlib.h>
 
 int main(void)
 {
-    void drawPicture()
+
+    
+    void drawPicture();
+    printf("±z¦n");
 
 
     return 0;
