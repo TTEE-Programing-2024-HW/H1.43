@@ -82,13 +82,13 @@ int main()
                     }
                     else if (tolower(response) == 'n')
                     {
-                        notacceptSuggestedSeats(seats); // Reject the seats, cancel all chosen seats, prepare for reselection
+                        notAcceptSuggestedSeats(seats); // Reject the seats, cancel all chosen seats, prepare for reselection
                         system("cls");
                     }
                     else // If the user inputs an invalid character (not within options)
                     {
                         printf("\nInvalid input, please re-enter.\n");
-                        notacceptSuggestedSeats(seats); // Revert temporarily marked seats
+                        notAcceptSuggestedSeats(seats); // Revert temporarily marked seats
                         pressToContinue();
                         system("cls");
                     }
@@ -321,4 +321,50 @@ int suggestSeats(int seats[ROWS][COLS], int numSeats)
 
     return lookfor; 
     // Return the value of 'lookfor' indicating whether enough seats were found for the user's request.
+}
+
+int findFourSeats(int seats[ROWS][COLS])
+{
+    int lookfor = 0; 
+    // Initialize found to 0
+
+    // First, try to find 4 continuous seats in one row
+    for (int i = 0; i < ROWS && !lookfor; i++)
+    {
+        for (int j = 0; j <= COLS - 4; j++)
+        {
+            if (seats[i][j] == 0 && seats[i][j + 1] == 0 && seats[i][j + 2] == 0 && seats[i][j + 3] == 0)
+            {
+                for (int k = 0; k < 4; k++)
+                {
+                    seats[i][j + k] = 2;
+                }
+                lookfor = 1;
+                break;
+            }
+        }
+    }
+
+    // If not found, try two consecutive rows with 2 seats each
+    if (!lookfor)
+    {
+        for (int i = 0; i < ROWS - 1 && !lookfor; i++)
+        {
+            for (int j = 0; j <= COLS - 2; j++)
+            {
+                if (seats[i][j] == 0 && seats[i][j + 1] == 0 &&
+                    seats[i + 1][j] == 0 && seats[i + 1][j + 1] == 0)
+                {
+                    seats[i][j] = 2;
+                    seats[i][j + 1] = 2;
+                    seats[i + 1][j] = 2;
+                    seats[i + 1][j + 1] = 2;
+                    lookfor = 1;
+                    break;
+                }
+            }
+        }
+    }
+
+    return lookfor;
 }
