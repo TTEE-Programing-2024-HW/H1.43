@@ -390,7 +390,7 @@ void acceptSuggestedSeats(int seats[ROWS][COLS])
     }
 }
 
-void notacceptSuggestedSeats(int seats[ROWS][COLS])
+void notAcceptSuggestedSeats(int seats[ROWS][COLS])
 {
     // Define a function named notacceptSuggestedSeats that accepts a 2D seat array as a parameter,
     // and reverts all temporarily selected seats back to empty state.
@@ -548,7 +548,7 @@ int exit()
         else
         {
             printf("Invalid input, please re-enter.\n");
-            // Prompt user to re-enter
+            //re-enter
         }
     }
 }
