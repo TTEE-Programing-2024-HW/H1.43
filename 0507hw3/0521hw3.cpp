@@ -552,4 +552,29 @@ int exit()
         }
     }
 }
+//心得
+//看到這次作業的第一眼是選單，
+//還以為老師出錯作業，沒想到最難的其實在後頭。
+//在多次出現問題之後，為了確保自己理解每行程式的邏輯，
+//我盡可能將程式碼融會貫通，瘋狂地為程式碼寫上我看得懂的註解(中文)，
+//最後再改為英文註解(英文太爛)。
 
+//因為這次的作業實在有點難且考驗邏輯，加上對github不夠熟習，
+//程式碼依舊無法實現修改完立即上傳版本紀錄(push上去github)，
+//所以這次讓我知道除了程式，英文和GITHUB也挺爛的。
+//希望未來能找到能更精簡且容易了解的寫註解的方法，才不會讓一個程式碼達到600多行太過冗長。
+
+
+//Seeing the menu at first glance made me think the teacher had assigned the wrong task, 
+//but it turns out the real challenge was at the end.After encountering multiple issues,
+// to ensure I understood the logic of each line of code,
+// I tried my best to fully comprehend the code and wrote extensive comments in Chinese
+// that I could understand, which I later translated into English (my English isn't very good).
+
+//This assignment was particularly challenging and tested my logic skills.
+//Additionally, my unfamiliarity with GitHub meant that I couldn't immediately upload version records
+// (push to GitHub) after making modifications to the code.
+// This experience taught me that I need to learn not just programming, but also English and GitHub.
+
+//I hope to find a way to write more concise and understandable comments in the future,
+// so a single piece of code doesn't end up being over 600 lines long.
