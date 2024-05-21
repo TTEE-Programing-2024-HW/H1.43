@@ -24,7 +24,7 @@ void initializeSeats(int seats[ROWS][COLS]);           // Initialize the seat ma
 void pressToContinue();                                // "Press any key to continue" for convenience
 int exitConfirmation();                                // "Exit menu" functionality
 void menu();                                           // Display the main menu for the first option
-void notacceptSuggestedSeats(int seats[ROWS][COLS]);   // Reject suggested seats, cancel all chosen seats, prepare for reselection
+void notAcceptSuggestedSeats(int seats[ROWS][COLS]);   // Reject suggested seats, cancel all chosen seats, prepare for reselection
 int suggestSeats(int seats[ROWS][COLS], int numSeats); // Auto seat selection functionality
 void acceptSuggestedSeats(int seats[ROWS][COLS]);      // Accept seats (after manual or auto selection, ask if user accepts)
 int findFourSeats(int seats[ROWS][COLS]);
@@ -171,7 +171,7 @@ int checkPassword()
         }
         else
         {
-            printf("\nPassword incorrect! You have %d frequency left.\n", 2 - attempts);
+            printf("\nPassword incorrect! You have %d frequency left.\n", 2 - frequency);
             frequency++;
         }
     }
@@ -270,3 +270,55 @@ int suggestSeats(int seats[ROWS][COLS], int numSeats)
     int lookfor = 0; 
     // Variable to indicate whether enough seats were found to meet the user's request.
     // Initialized to 0, indicating not found yet.
+    if (numSeats >= 1 && numSeats <= 3)
+    {
+        // Try to find numSeats in a single row
+        for (int i = 0; i < ROWS && !lookfor; i++)
+        {
+            for (int j = 0; j <= COLS - numSeats; j++)
+            {
+                int valid = 1; 
+                // Initial setting to 1, assuming seats are valid at the start.
+
+                for (int k = 0; k < numSeats; k++) 
+                // Loop to check for valid seats sequentially
+                {
+                    if (seats[i][j + k] != 0)
+                    {
+                        valid = 0; 
+                        break; 
+                        // If a seat is found, set valid to 0 and break the loop
+                    }
+                }
+                if (valid)
+                // If the above code completes without changing the valid variable,
+                // it indicates valid seats were found
+                {
+                    for (int k = 0; k < numSeats; k++)
+                    {
+                        seats[i][j + k] = 2;
+                        // Set the seats as temporarily selected
+                    }
+                    lookfor = 1;
+                    break;
+                }
+            }
+        }
+    }
+    // If numSeats is within 1 to 3,
+    // The function tries to find these seats in the same row.
+    // If numSeats is 4,
+    // The function calls findFourSeats to try to find four contiguous seats or two adjacent rows with two seats each.
+
+    else if (numSeats == 4)
+    {
+        // Try to find 4 seats in one row or two consecutive rows with 2 seats each
+        lookfor = findFourSeats(seats);
+        // If the user wants to select four seats,
+        // The requirement is that the four people either sit in the same row or form a square.
+        // The seat allocation method is different from the case of 1, 2, or 3 seats.
+    }
+
+    return lookfor; 
+    // Return the value of 'lookfor' indicating whether enough seats were found for the user's request.
+}
