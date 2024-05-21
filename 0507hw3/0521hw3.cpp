@@ -246,3 +246,27 @@ void initializeSeats(int seats[ROWS][COLS])
         }
     }
 }
+
+void showSeats(int seats[ROWS][COLS])
+{
+    printf("\nSeat map:\n");
+    printf("\n");
+    printf("  123456789\n");
+    for (int i = 0; i < ROWS; i++)
+    {
+        printf("%d ", i + 1);
+        for (int j = 0; j < COLS; j++)
+        {
+            printf("%c", seats[i][j] == 1 ? '*' : (seats[i][j] == 2 ? '@' : '-')); // Display seat status
+        }
+        // If the user confirms the seat, change the symbol from '@' (temporary) to '*'
+        // 0, 1, 2 represent available, booked, and temporarily selected seats respectively
+        printf("\n");
+    }
+}
+
+int suggestSeats(int seats[ROWS][COLS], int numSeats)
+{
+    int lookfor = 0; 
+    // Variable to indicate whether enough seats were found to meet the user's request.
+    // Initialized to 0, indicating not found yet.
