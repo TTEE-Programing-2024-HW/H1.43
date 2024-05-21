@@ -1,4 +1,5 @@
 // 0521hw3_H1.43ฎ}บ๛งก
+//ด๚ธี 
 #include <stdio.h>
 #include <stdlib.h>
 // For using the rand() function
