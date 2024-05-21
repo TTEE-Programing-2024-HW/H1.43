@@ -137,7 +137,7 @@ int main()
 
 int checkPassword()
 {
-    int password, attempts = 0, correctPassword = 2024;
+    int password, frequency = 0, correctPassword = 2024;
     // First question
     printf("This is the welcome screen, this is an owl\n");
     printf("                           .__.\n");
@@ -157,3 +157,45 @@ int checkPassword()
     printf("             /  /\\  \\=====/ /\\  \\ \\\n");
     printf("            /__/  \\__|___|__/  \\__\\\n");
     printf("           |_______________________|\n");
+    
+    while (frequency < 3)
+    {
+        //When the password is entered more than three times,
+        //it will stop accepting user input and stop the program.
+        printf("Please enter password:");
+        fflush(stdin);
+        scanf("%d", &password);
+        if (password == correctPassword)
+        {
+            return 1;
+        }
+        else
+        {
+            printf("\nPassword incorrect! You have %d frequency left.\n", 2 - attempts);
+            frequency++;
+        }
+    }
+    return 0;
+}
+
+void menu() // Display menu
+{
+    system("cls");
+    printf("|----------[BookingSystem]-----------|\n");
+    printf("|  a. Available seats                |\n");
+    printf("|  b. Arrange for you                |\n");
+    printf("|  c. Choose by yourself             |\n");
+    printf("|  d. Exit                           |\n");
+    printf("|------------------------------------|\n");
+    printf("Please choose one of the options:");
+}
+
+void pressToContinue() 
+// "Press any key to continue" for convenience, to simplify the program and improve efficiency
+{
+    printf("\nPress any key to continue...");
+    getch(); 
+    //The program continues execution only after 
+    //receiving input from any key on the keyboard.
+    //Give users more time to read the displayed message.
+}
