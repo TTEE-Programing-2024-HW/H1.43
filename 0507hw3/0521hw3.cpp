@@ -199,3 +199,50 @@ void pressToContinue()
     //receiving input from any key on the keyboard.
     //Give users more time to read the displayed message.
 }
+
+void initializeSeats(int seats[ROWS][COLS])
+{
+    srand(time(NULL)); 
+    // time(NULL) has a fixed form and cannot be modified
+    // It constantly updates until this function is used
+    // It stops the function and gets a random variable
+    // Because the execution time of the program can never be the same to 0.000... seconds
+    // After closing the program, this function will automatically update the time, so the problem of the same random variable does not exist
+    // Initialize random seed
+
+    for (int i = 0; i < ROWS; i++)
+    {
+        for (int j = 0; j < COLS; j++)
+        {
+            // Indicates starting from the first row.
+            // i < ROWS;: Condition check to ensure the value of i is within valid range (less than the total number of rows).
+            // i++: Increment i after each loop to move to the next row.
+
+            seats[i][j] = 0; 
+            // Initialize all seats as empty
+        }
+    }
+
+    int Reserve = 0; // Initialize the number of booked seats
+    while (Reserve < 10) // Use a loop to randomly book seats until a total of 10 seats are booked.
+    { // Pre-book some seats randomly
+        int a = rand() % ROWS; 
+        int b = rand() % COLS;
+        //a and b are two variables representing rows and columns
+
+        // rand() % ROWS:
+        // Generates a random integer between 0 and ROWS-1,
+        // Indicating the randomly selected row index.
+
+        // rand() % COLS:
+        // Generates a random integer between 0 and COLS-1,
+        // Indicating the randomly selected column index.
+
+        if (seats[a][b] == 0)
+        {
+            seats[a][b] = 1;
+            // Check if the randomly selected seat is empty and mark it as booked.
+            Reserve++;
+        }
+    }
+}
