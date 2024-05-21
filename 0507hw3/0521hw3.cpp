@@ -22,7 +22,7 @@ void chooseSeats(int seats[ROWS][COLS]);               // Choose seats
 void showSeats(int seats[ROWS][COLS]);                 // Display booked seats
 void initializeSeats(int seats[ROWS][COLS]);           // Initialize the seat map
 void pressToContinue();                                // "Press any key to continue" for convenience
-int exitConfirmation();                                // "Exit menu" functionality
+int exit();                                // "Exit menu" functionality
 void menu();                                           // Display the main menu for the first option
 void notAcceptSuggestedSeats(int seats[ROWS][COLS]);   // Reject suggested seats, cancel all chosen seats, prepare for reselection
 int suggestSeats(int seats[ROWS][COLS], int numSeats); // Auto seat selection functionality
@@ -107,7 +107,7 @@ int main()
                 break;
 
             case 'd':
-                keepRunning = exitConfirmation();
+                keepRunning = exit();
                 // Determine when to exit the loop (press 'N' to exit the loop)
 
                 // After pressing 'd', the user can input 'y', 'Y', 'n', or 'N', handled by the exitConfirmation() function
@@ -157,11 +157,11 @@ int checkPassword()
     printf("             /  /\\  \\=====/ /\\  \\ \\\n");
     printf("            /__/  \\__|___|__/  \\__\\\n");
     printf("           |_______________________|\n");
-    
+
     while (frequency < 3)
     {
-        //When the password is entered more than three times,
-        //it will stop accepting user input and stop the program.
+        // When the password is entered more than three times,
+        // it will stop accepting user input and stop the program.
         printf("Please enter password:");
         fflush(stdin);
         scanf("%d", &password);
@@ -190,19 +190,19 @@ void menu() // Display menu
     printf("Please choose one of the options:");
 }
 
-void pressToContinue() 
+void pressToContinue()
 // "Press any key to continue" for convenience, to simplify the program and improve efficiency
 {
     printf("\nPress any key to continue...");
-    getch(); 
-    //The program continues execution only after 
-    //receiving input from any key on the keyboard.
-    //Give users more time to read the displayed message.
+    getch();
+    // The program continues execution only after
+    // receiving input from any key on the keyboard.
+    // Give users more time to read the displayed message.
 }
 
 void initializeSeats(int seats[ROWS][COLS])
 {
-    srand(time(NULL)); 
+    srand(time(NULL));
     // time(NULL) has a fixed form and cannot be modified
     // It constantly updates until this function is used
     // It stops the function and gets a random variable
@@ -218,17 +218,17 @@ void initializeSeats(int seats[ROWS][COLS])
             // i < ROWS;: Condition check to ensure the value of i is within valid range (less than the total number of rows).
             // i++: Increment i after each loop to move to the next row.
 
-            seats[i][j] = 0; 
+            seats[i][j] = 0;
             // Initialize all seats as empty
         }
     }
 
-    int Reserve = 0; // Initialize the number of booked seats
+    int Reserve = 0;     // Initialize the number of booked seats
     while (Reserve < 10) // Use a loop to randomly book seats until a total of 10 seats are booked.
-    { // Pre-book some seats randomly
-        int a = rand() % ROWS; 
+    {                    // Pre-book some seats randomly
+        int a = rand() % ROWS;
         int b = rand() % COLS;
-        //a and b are two variables representing rows and columns
+        // a and b are two variables representing rows and columns
 
         // rand() % ROWS:
         // Generates a random integer between 0 and ROWS-1,
@@ -267,7 +267,7 @@ void showSeats(int seats[ROWS][COLS])
 
 int suggestSeats(int seats[ROWS][COLS], int numSeats)
 {
-    int lookfor = 0; 
+    int lookfor = 0;
     // Variable to indicate whether enough seats were found to meet the user's request.
     // Initialized to 0, indicating not found yet.
     if (numSeats >= 1 && numSeats <= 3)
@@ -277,16 +277,16 @@ int suggestSeats(int seats[ROWS][COLS], int numSeats)
         {
             for (int j = 0; j <= COLS - numSeats; j++)
             {
-                int valid = 1; 
+                int valid = 1;
                 // Initial setting to 1, assuming seats are valid at the start.
 
-                for (int k = 0; k < numSeats; k++) 
+                for (int k = 0; k < numSeats; k++)
                 // Loop to check for valid seats sequentially
                 {
                     if (seats[i][j + k] != 0)
                     {
-                        valid = 0; 
-                        break; 
+                        valid = 0;
+                        break;
                         // If a seat is found, set valid to 0 and break the loop
                     }
                 }
@@ -319,13 +319,13 @@ int suggestSeats(int seats[ROWS][COLS], int numSeats)
         // The seat allocation method is different from the case of 1, 2, or 3 seats.
     }
 
-    return lookfor; 
+    return lookfor;
     // Return the value of 'lookfor' indicating whether enough seats were found for the user's request.
 }
 
 int findFourSeats(int seats[ROWS][COLS])
 {
-    int lookfor = 0; 
+    int lookfor = 0;
     // Initialize found to 0
 
     // First, try to find 4 continuous seats in one row
@@ -335,7 +335,7 @@ int findFourSeats(int seats[ROWS][COLS])
         {
             if (seats[i][j] == 0 && seats[i][j + 1] == 0 && seats[i][j + 2] == 0 && seats[i][j + 3] == 0)
             {
-                //Check if there are four consecutive empty seats
+                // Check if there are four consecutive empty seats
                 for (int k = 0; k < 4; k++)
                 {
                     seats[i][j + k] = 2;
@@ -355,17 +355,17 @@ int findFourSeats(int seats[ROWS][COLS])
             {
                 if (seats[i][j] == 0 && seats[i][j + 1] == 0 &&
                     seats[i + 1][j] == 0 && seats[i + 1][j + 1] == 0)
-                //Check whether the 2x2 area with (i, j) as the upper left corner
-                // in the seating chart is all empty seats
-                
+                // Check whether the 2x2 area with (i, j) as the upper left corner
+                //  in the seating chart is all empty seats
+
                 {
                     seats[i][j] = 2;
                     seats[i][j + 1] = 2;
                     seats[i + 1][j] = 2;
                     seats[i + 1][j + 1] = 2;
-                    //If the if condition is true, it means a 2x2 area is found,
-                    //Here, set the seat status of this area to 2,
-                    //Indicates that these seats are temporarily selected.
+                    // If the if condition is true, it means a 2x2 area is found,
+                    // Here, set the seat status of this area to 2,
+                    // Indicates that these seats are temporarily selected.
                     lookfor = 1;
                     break;
                 }
@@ -409,9 +409,9 @@ void notacceptSuggestedSeats(int seats[ROWS][COLS])
 
 void chooseSeats(int seats[ROWS][COLS])
 {
-    int row, col; // Variables to store row and column
-    char input[10]; // Array to store user input for row and column number
-    char response; // Variable to store the user's response while making choices
+    int row, col;       // Variables to store row and column
+    char input[10];     // Array to store user input for row and column number
+    char response;      // Variable to store the user's response while making choices
     int totalSeats = 0; // Count the number of seats chosen by the user
 
     while (1) // Loop for seat selection until 'q' or 'Q' is entered
@@ -421,13 +421,13 @@ void chooseSeats(int seats[ROWS][COLS])
         scanf("%s", input);
 
         if (tolower(input[0]) == 'q')
-        { 
+        {
             // If the user inputs 'q' or 'Q' (quit), end the seat selection
             break;
         }
 
         if (sscanf(input, "%d-%d", &row, &col) == 2 && row >= 1 && row <= ROWS && col >= 1 && col <= COLS)
-        {   
+        {
             // Allow the user to select seats in the format of integer-integer, e.g., 2-1 for Row 2, Column 1
 
             // sscanf: Extracts data from an existing string.
@@ -444,7 +444,7 @@ void chooseSeats(int seats[ROWS][COLS])
 
             // The return value of sscanf is the number of successfully parsed items,
             // If two integers are successfully parsed, the return value should be 2.
-            
+
             // row >= 1 && row <= ROWS && col >= 1 && col <= COLS:
             // Check if the parsed row and col are within valid range,
             // The row number (row) should be between 1 and ROWS,
@@ -454,10 +454,10 @@ void chooseSeats(int seats[ROWS][COLS])
             {
                 // Check if the user-selected seat is empty
                 // 0 and 2 in seats[][] function represent empty and temporarily selected seats respectively
-                
+
                 // Since seat row and column start from 1, but array index starts from 0,
                 // Adjust to [row - 1]
-                
+
                 seats[row - 1][col - 1] = 2;
                 // 2 represents temporarily selected
 
@@ -504,7 +504,7 @@ void chooseSeats(int seats[ROWS][COLS])
         }
         else
         {
-            notacceptSuggestedSeats(seats); 
+            notacceptSuggestedSeats(seats);
             // Cancel all temporarily selected seats (state 2)
             // Revert unconfirmed choices
             printf("Selection reverted.\n");
@@ -517,3 +517,39 @@ void chooseSeats(int seats[ROWS][COLS])
 
     system("cls"); // Clear the screen
 }
+
+int exit()
+{
+    char response; // Variable to store the user's response character
+    
+    while (1) // Infinite loop
+    {
+        printf("\nContinue? (Y/N): ");
+        fflush(stdin); // Clear the input buffer to ensure correct input is read
+        scanf(" %c", &response);
+        response = tolower(response);
+
+        if (response == 'y')
+        {
+            printf("\nPlease continue entering.\n");
+            printf("\nPress any key to continue...");
+            getch();
+            return 1; // Return to main menu
+            // Continue operation
+        }
+        else if (response == 'n')
+        {
+            printf("\nThe program will end soon.\n");
+            printf("\nPress any key to continue...");
+            // Prompt the program will end soon
+            getch(); // Wait for user to press any key
+            return 0; // End program
+        }
+        else
+        {
+            printf("Invalid input, please re-enter.\n");
+            // Prompt user to re-enter
+        }
+    }
+}
+
