@@ -504,7 +504,7 @@ void chooseSeats(int seats[ROWS][COLS])
         }
         else
         {
-            notacceptSuggestedSeats(seats);
+            notAcceptSuggestedSeats(seats);
             // Cancel all temporarily selected seats (state 2)
             // Revert unconfirmed choices
             printf("Selection reverted.\n");
@@ -531,8 +531,8 @@ int exit()
 
         if (response == 'y')
         {
-            printf("\nPlease continue entering.\n");
-            printf("\nPress any key to continue...");
+            printf("continue entering.\n");
+            printf("Press any key to continue...\n");
             getch();
             return 1; // Return to main menu
             // Continue operation
@@ -540,7 +540,7 @@ int exit()
         else if (response == 'n')
         {
             printf("\nThe program will end soon.\n");
-            printf("\nPress any key to continue...");
+            printf("\nPress any key to continue...\n");
             // Prompt the program will end soon
             getch(); // Wait for user to press any key
             return 0; // End program
