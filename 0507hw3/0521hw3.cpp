@@ -354,11 +354,16 @@ int findFourSeats(int seats[ROWS][COLS])
             {
                 if (seats[i][j] == 0 && seats[i][j + 1] == 0 &&
                     seats[i + 1][j] == 0 && seats[i + 1][j + 1] == 0)
+                //檢查在座位表中以 (i, j) 為左上角的 2x2 區域是否都是空座位
+                
                 {
                     seats[i][j] = 2;
                     seats[i][j + 1] = 2;
                     seats[i + 1][j] = 2;
                     seats[i + 1][j + 1] = 2;
+                    //如果 if 條件為真，表示找到了一個 2x2 區域，
+                    //這裡將這個區域的座位狀態設置為 2，
+                    //表示暫時選擇這些座位。
                     lookfor = 1;
                     break;
                 }
