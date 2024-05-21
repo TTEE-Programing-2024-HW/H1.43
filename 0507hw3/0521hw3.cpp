@@ -335,7 +335,6 @@ int findFourSeats(int seats[ROWS][COLS])
         {
             if (seats[i][j] == 0 && seats[i][j + 1] == 0 && seats[i][j + 2] == 0 && seats[i][j + 3] == 0)
             {
-                //檢查有沒有連續的四個空座位
                 //Check if there are four consecutive empty seats
                 for (int k = 0; k < 4; k++)
                 {
@@ -375,4 +374,146 @@ int findFourSeats(int seats[ROWS][COLS])
     }
 
     return lookfor;
+}
+
+void acceptSuggestedSeats(int seats[ROWS][COLS])
+{
+    for (int i = 0; i < ROWS; i++)
+    {
+        for (int j = 0; j < COLS; j++)
+        {
+            if (seats[i][j] == 2)
+            {
+                seats[i][j] = 1; // Confirm the seat selection by marking it reserved
+            }
+        }
+    }
+}
+
+void notacceptSuggestedSeats(int seats[ROWS][COLS])
+{
+    // Define a function named notacceptSuggestedSeats that accepts a 2D seat array as a parameter,
+    // and reverts all temporarily selected seats back to empty state.
+    for (int i = 0; i < ROWS; i++)
+    {
+        for (int j = 0; j < COLS; j++)
+        {
+            if (seats[i][j] == 2) // Check if the current seat is temporarily selected
+            {
+                seats[i][j] = 0; // Revert the current temporarily selected seat state from 2 to empty state 0
+                // Revert suggested seats back to empty
+            }
+        }
+    }
+}
+
+void chooseSeats(int seats[ROWS][COLS])
+{
+    int row, col; // Variables to store row and column
+    char input[10]; // Array to store user input for row and column number
+    char response; // Variable to store the user's response while making choices
+    int totalSeats = 0; // Count the number of seats chosen by the user
+
+    while (1) // Loop for seat selection until 'q' or 'Q' is entered
+    {
+        printf("\nPlease enter seat choice (format like 1-2 for Row 1, Column 2) or enter 'Q' or 'q' to finish choosing: ");
+        fflush(stdin);
+        scanf("%s", input);
+
+        if (tolower(input[0]) == 'q')
+        { 
+            // If the user inputs 'q' or 'Q' (quit), end the seat selection
+            break;
+        }
+
+        if (sscanf(input, "%d-%d", &row, &col) == 2 && row >= 1 && row <= ROWS && col >= 1 && col <= COLS)
+        {   
+            // Allow the user to select seats in the format of integer-integer, e.g., 2-1 for Row 2, Column 1
+
+            // sscanf: Extracts data from an existing string.
+            // Useful for handling configuration file contents, network protocol data, or other formatted strings.
+
+            // scanf: Suitable for reading data from user input,
+            // For example, obtaining user input from the console.
+
+            // sscanf(input, "%d-%d", &row, &col):
+            // This code uses the sscanf function to parse the user's input string (input),
+            // And attempts to convert it into two integers (row and col).
+            // The format parsed is "%d-%d", indicating parsing input like 1-2,
+            // Where 1 and 2 will be parsed as integers and stored in row and col.
+
+            // The return value of sscanf is the number of successfully parsed items,
+            // If two integers are successfully parsed, the return value should be 2.
+            
+            // row >= 1 && row <= ROWS && col >= 1 && col <= COLS:
+            // Check if the parsed row and col are within valid range,
+            // The row number (row) should be between 1 and ROWS,
+            // The column number (col) should be between 1 and COLS.
+
+            if (seats[row - 1][col - 1] == 0)
+            {
+                // Check if the user-selected seat is empty
+                // 0 and 2 in seats[][] function represent empty and temporarily selected seats respectively
+                
+                // Since seat row and column start from 1, but array index starts from 0,
+                // Adjust to [row - 1]
+                
+                seats[row - 1][col - 1] = 2;
+                // 2 represents temporarily selected
+
+                totalSeats++; // Increment seat count
+            }
+            else
+            {
+                printf("Error: The seat is already booked or unavailable.\n");
+                // Display warning message if seat is not empty
+            }
+        }
+        else
+        {
+            printf("Error: Incorrect input format.\n");
+            // Display error message for incorrect format
+        }
+    }
+
+    if (totalSeats > 0)
+    {
+        // After the user selects seats,
+        // Display the selected seats and ask if the user is satisfied with the choices,
+        // Then confirm or cancel these choices based on the user's response.
+        showSeats(seats);
+        printf("\nAre you satisfied with the seat choices (y/n)?: ");
+        fflush(stdin);
+        scanf(" %c", &response);
+        if (tolower(response) == 'y')
+        {
+            for (int i = 0; i < ROWS; i++)
+            { // Confirm choices, convert '@' to '*'
+                for (int j = 0; j < COLS; j++)
+                {
+                    if (seats[i][j] == 2)
+                    {
+                        // 2: temporarily selected
+                        // 1: booked
+                        seats[i][j] = 1; // Confirm choice
+                        // Set seats[i][j] to indicate the seat is finally confirmed and booked
+                    }
+                }
+            }
+            printf("Selection confirmed.\n");
+        }
+        else
+        {
+            notacceptSuggestedSeats(seats); 
+            // Cancel all temporarily selected seats (state 2)
+            // Revert unconfirmed choices
+            printf("Selection reverted.\n");
+            // Display cancellation message
+        }
+        pressToContinue();
+        // Ensure the user has enough time to read the message,
+        // And press a key to continue when ready.
+    }
+
+    system("cls"); // Clear the screen
 }
