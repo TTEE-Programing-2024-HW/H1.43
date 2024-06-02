@@ -23,7 +23,7 @@
 #define BIG_TIMES 3
 //最大次數是3
 
-// 使用 typedef 定義結構體類型 Student
+// 使用 typedef 定義結構體類型
 typedef struct
 {
     char name[NAME_LEN];
@@ -36,9 +36,17 @@ typedef struct
 
 
 // 預先宣告函數
-void drawPicture();   // 個人風格化頁面
-void checkPassword(); // 檢查密碼
-void pressToContinue(); //按下按鍵後清除螢幕進入下一步 
+void drawPicture();   // 個人風格化頁面 可
+void checkPassword(); // 檢查密碼 可
+void pressToContinue(); //按下按鍵後清除螢幕進入下一步 可
+
+void displayChooseMenu(); // 顯示主選單的函數 OK
+void enterStudentGrades(Student students[], int *n);  // 輸入學生成績的函數
+void searchStudentGrades(Student students[], int n);  // 搜尋學生成績的函數
+void gradeRanking(Student students[], int n);         // 成績排名的函數
+void displayStudentGrades(Student students[], int n); // 顯示學生成績的函數
+void exitConfirmation(); // 確認離開的函數
+void showMain();      // 顯示歡迎的圖案 
 
 //「按下任何鍵繼續」，為了方便，簡化程式提升效率
 // 複習
@@ -95,12 +103,12 @@ void drawPicture()
     return 0;
 }
 
-int checkPassword()
+void checkPassword()
 {
     int password;               // 儲存使用者輸入的密碼
     int correctpassword = 2024; // 儲存正確密碼
     int count = 0;              // 儲存錯誤次數
-    // 本來錯誤次數預設1，第一次被呼叫的時候，
+    //本來錯誤次數預設1，第一次被呼叫的時候，
     //就不用再多一個count = count + 1;的步驟。 
     //但使用do-while會出問題 
 
@@ -145,28 +153,35 @@ int checkPassword()
 }
 
 
-
-
-
-
 void pressToContinue() //按下按鍵後清除螢幕進入下一步  
 {
     printf("按下任一按鍵");
     getch();
 }
 
+// 顯示主選單的函數
+void displayChooseMenu()
+{
+    printf(" ------------[Grade System]-----------\n");
+    printf("|     a. Enter student grades         |\n");
+    printf("|     b. Display student grades       |\n");
+    printf("|     c. Search for student grades    |\n");
+    printf("|     d. Grade ranking                |\n");
+    printf("|     e. Exit system                  |\n");
+    printf(" -------------------------------------\n");
+}
 //心得:
+//1.
 //這次作業相較上次簡單一些，
 //但作業還是沒辦法在實驗課上課時間內寫完的題目，
 //希望未來能力可以做到。
-//github則學會解決一些常見問題，
-<<<<<<< HEAD
+//2.
+//在github上則學會解決一些常見問題，
 //例如
 //"nothing to commit, working tree clean"
-=======
-//例如"nothing to commit, working tree clean"
->>>>>>> f69166af91b3b54a0896b98045f955929b6021c3
 //"Changes not staged for commit"
 //"error: switch 'm' requires a value"
 //"fatal: invalid gitfile format: HW4.c"
-//等等的問題。
+//等等的問題。雖然也使得hash次數變得很多(因為搞出不少問題)，
+//但在deadline前，有學到東西蠻開心的。
+
