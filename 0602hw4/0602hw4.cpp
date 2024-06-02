@@ -159,8 +159,12 @@ void pressToContinue() //按下按鍵後清除螢幕進入下一步
 //但作業還是沒辦法在實驗課上課時間內寫完的題目，
 //希望未來能力可以做到。
 //github則學會解決一些常見問題，
+<<<<<<< HEAD
 //例如
 //"nothing to commit, working tree clean"
+=======
+//例如"nothing to commit, working tree clean"
+>>>>>>> f69166af91b3b54a0896b98045f955929b6021c3
 //"Changes not staged for commit"
 //"error: switch 'm' requires a value"
 //"fatal: invalid gitfile format: HW4.c"
