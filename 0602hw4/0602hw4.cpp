@@ -129,3 +129,14 @@ void pressToContinue() //按下按鍵後清除螢幕進入下一步
     printf("按下任一按鍵");
     getch();
 }
+
+//心得:
+//這次作業相較上次簡單一些，
+//但作業還是沒辦法在實驗課上課時間內寫完的題目，
+//希望未來能力可以做到。
+//github則學會解決一些常見問題，
+//例如"nothing to commit, working tree clean"
+//"Changes not staged for commit"
+//"error: switch 'm' requires a value"
+//"fatal: invalid gitfile format: HW4.c"
+//等等的問題。
