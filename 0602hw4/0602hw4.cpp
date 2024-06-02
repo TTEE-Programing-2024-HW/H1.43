@@ -46,7 +46,6 @@ void searchStudentGrades(Student students[], int n);  // 搜尋學生成績的函數
 void gradeRanking(Student students[], int n);         // 成績排名的函數
 void displayStudentGrades(Student students[], int n); // 顯示學生成績的函數
 void exitConfirmation(); // 確認離開的函數
-void showMain();      // 顯示歡迎的圖案 
 
 //「按下任何鍵繼續」，為了方便，簡化程式提升效率
 // 複習
@@ -59,14 +58,53 @@ void showMain();      // 顯示歡迎的圖案
 
 int main(void)
 {
+    Student students[MAX_STUDENTS];
+    int studentCount = 0;
+    char choice;
     //先顯示個人風格化畫面
     //執行檢查密碼函數，若檢查完
     drawPicture();
     // 叫不接受參數的函數不需在括號中填入 void
     checkPassword();
 
+        while (1)
+    {
+        pressToContinue(); 
+        //按下按鍵後清除螢幕進入下一步 
+        displayChooseMenu(); // 顯示主選單的函數 
+        printf("\n輸入您想使用的功能: \n");
+        fflush(stdin);
+        scanf("%c", &choice);
+        choice = tolower(choice);
+        // 字母大寫轉小寫
+
+        switch (choice)
+        {
+        case 'a':
+            enterStudentGrades(students, &studentCount);
+            break;
+        case 'b':
+            displayStudentGrades(students, studentCount);
+            break;
+        case 'c':
+            searchStudentGrades(students, studentCount);
+            break;
+        case 'd':
+            gradeRanking(students, studentCount);
+            break;
+        case 'e':
+            exitConfirmation();
+            break;
+        default:
+            printf("\n無效，請重新選擇。\n\n");
+            system("pause");
+            break;
+        }
+    }
+
     return 0;
 }
+
 
 void drawPicture()
 {
@@ -170,6 +208,77 @@ void displayChooseMenu()
     printf("|     e. Exit system                  |\n");
     printf(" -------------------------------------\n");
 }
+
+
+// 輸入學生成績的函數
+void enterStudentGrades(Student students[], int *n)
+{
+    pressToContinue(); //按下按鍵後清除螢幕進入下一步 可
+    while (1)
+    {
+        printf("請輸入學生人數 (5~10)：");
+        fflush(stdin);
+        scanf("%d", n);
+        if (*n >= MIN_STUDENTS && *n <= MAX_STUDENTS)
+        {
+            break;
+        }
+        else
+        {
+            printf("\n輸入錯誤，請輸入 5 到 10 之間的整數。\n\n");
+        }
+    }
+
+    for (int i = 0; i < *n; i++)
+    {
+        printf("\n請輸入第 %d 位學生資料\n", i + 1);
+
+        printf("姓名：");
+        fflush(stdin);
+        scanf("%s", students[i].name);
+
+        printf("學號 (6位整數)：");
+        while (scanf("%d", &students[i].id) != 1 || students[i].id < 100000 || students[i].id > 999999)
+        {
+            printf("\n學號輸入錯誤，請輸入 6 位整數學號：");
+            while (getchar() != '\n')
+                ; // 清除緩衝區
+        }
+
+        printf("數學成績 (0~100)：");
+        while (scanf("%d", &students[i].math) != 1 || students[i].math < 0 || students[i].math > 100)
+        {
+            printf("\n數學成績輸入錯誤，請輸入 0 到 100 之間的分數：");
+            while (getchar() != '\n')
+                ; // 清除緩衝區
+        }
+
+        printf("物理成績 (0~100)：");
+        while (scanf("%d", &students[i].physics) != 1 || students[i].physics < 0 || students[i].physics > 100)
+        {
+            printf("\n物理成績輸入錯誤，請輸入 0 到 100 之間的分數：");
+            while (getchar() != '\n')
+                ; // 清除緩衝區
+        }
+
+        printf("英文成績 (0~100)：");
+        while (scanf("%d", &students[i].english) != 1 || students[i].english < 0 || students[i].english > 100)
+        {
+            printf("\n英文成績輸入錯誤，請輸入 0 到 100 之間的分數：");
+            while (getchar() != '\n')
+                ; // 清除緩衝區
+        }
+
+        // 計算平均成績
+        students[i].average = (students[i].math + students[i].physics + students[i].english) / 3.0;
+    }
+
+    printf("\n所有學生資料已輸入完畢，請按下任一鍵以返回主選單。");
+    getch();
+    //按下按鍵並繼續
+}
+
+
 //心得:
 //1.
 //這次作業相較上次簡單一些，
