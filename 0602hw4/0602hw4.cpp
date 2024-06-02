@@ -10,9 +10,32 @@
 #include <conio.h>
 // 用來使用getch()、getche()讀取鍵盤輸入
 
+//以下為 預處理器
+#define MAX_STUDENTS 10
+#define MIN_STUDENTS 5
+//設定學生人數最小值為5，最大值10
+#define NAME_LEN 50
+//設定姓名的長度最大值為50
+#define ID_LEN 6
+//限制學號是六位整數
+#define BIG_TIMES 3
+//最大次數是3
+
+// 使用 typedef 定義結構體類型 Student
+typedef struct
+{
+    char name[NAME_LEN];
+    int id;
+    int math;
+    int physics;
+    int english;
+    float average;
+} Student;
+
+
 // 預先宣告函數
-int drawPicture();   // 個人風格化頁面
-int checkPassword(); // 檢查密碼
+void drawPicture();   // 個人風格化頁面
+void checkPassword(); // 檢查密碼
 void pressToContinue(); //按下按鍵後清除螢幕進入下一步 
 
 //「按下任何鍵繼續」，為了方便，簡化程式提升效率
@@ -35,7 +58,7 @@ int main(void)
     return 0;
 }
 
-int drawPicture()
+void drawPicture()
 {
     printf("這是一本書\n");
 	printf(" _______________________________\n");
@@ -129,3 +152,15 @@ void pressToContinue() //按下按鍵後清除螢幕進入下一步
     printf("按下任一按鍵");
     getch();
 }
+
+//心得:
+//這次作業相較上次簡單一些，
+//但作業還是沒辦法在實驗課上課時間內寫完的題目，
+//希望未來能力可以做到。
+//github則學會解決一些常見問題，
+//例如
+//"nothing to commit, working tree clean"
+//"Changes not staged for commit"
+//"error: switch 'm' requires a value"
+//"fatal: invalid gitfile format: HW4.c"
+//等等的問題。
