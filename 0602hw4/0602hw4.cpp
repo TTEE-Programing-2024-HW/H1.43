@@ -1,4 +1,5 @@
 // H1.43徐維均 HW4
+//vscode測試
 #include <stdio.h>
 #include <stdlib.h>
 // 為了使用rand()函數
