@@ -145,7 +145,6 @@ void drawPicture()
     printf("|                         /    ||\n");
     printf("|_________________________/     |\n");
     printf("|_________________________/     /\n");
-    return 0;
 }
 
 void checkPassword()
@@ -296,12 +295,149 @@ void enterStudentGrades(Student students[], int *n)
     //按下按鍵並繼續
 }
 
+// 顯示學生成績的函數
+// 功能：顯示所有學生的成績資料，
+// 包括姓名、學號、數學成績、物理成績、英文成績和平均成績。
+// 使用：當使用者選擇顯示學生成績時，執行此函數。
 
+void displayStudentGrades(Student students[], int n)
+{
+    pressToContinue(); //按下按鍵後清除螢幕進入下一步 可
+    printf("學生姓名\t學號\t數學\t物理\t英文\t平均成績\n");
+    // "\t"用來對齊
+    printf("===================================================\n");
+
+    for (int i = 0; i < n; i++)
+    {
+        printf("%s\t\t%d\t%d\t%d\t%d\t%.1f\n", students[i].name, students[i].id, students[i].math, students[i].physics, students[i].english, students[i].average);
+    }
+
+    printf("\n請按下任一鍵以返回主選單...");
+    getch(); // 等待用戶按鍵
+}
+
+// 搜尋學生成績的函數
+// 功能：根據使用者輸入的姓名搜尋學生資料。
+// 使用：當使用者選擇搜尋學生成績時，執行此函數。
+// 步驟：
+// 提示使用者輸入要搜尋的學生姓名，並將姓名轉換為小寫字母。
+// 遍歷所有學生資料，將每個學生的姓名轉換為小寫字母，並與輸入的姓名進行比較。
+// 若找到匹配的學生，顯示該學生的所有成績資料，並設定 found 為 1。
+// 若遍歷完所有學生仍未找到匹配的姓名，顯示 "資料不存在" 的提示。
+
+void searchStudentGrades(Student students[], int n)
+{
+    char searchName[NAME_LEN];
+    int found = 0;
+
+    pressToContinue(); //按下按鍵後清除螢幕進入下一步 可
+    printf("請輸入要搜尋的學生姓名，英文不分大小寫：");
+    scanf("%s", searchName);
+
+    // 將搜尋姓名轉換為小寫
+    for (int i = 0; searchName[i]; i++)
+    {
+        searchName[i] = tolower(searchName[i]);
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        char tempName[NAME_LEN];
+        strcpy(tempName, students[i].name);
+
+        // 將學生姓名轉換為小寫
+        for (int j = 0; tempName[j]; j++)
+        {
+            tempName[j] = tolower(tempName[j]);
+        }
+
+        if (strcmp(tempName, searchName) == 0)
+        {
+            printf("\n學生資料：\n");
+            printf("姓名：%s\n", students[i].name);
+            printf("學號：%d\n", students[i].id);
+            printf("數學成績：%d\n", students[i].math);
+            printf("物理成績：%d\n", students[i].physics);
+            printf("英文成績：%d\n", students[i].english);
+            printf("平均成績：%.1f\n", students[i].average);
+            found = 1;
+            break;
+        }
+    }
+
+    if (!found)
+    {
+        printf("\n此筆資料不存在。\n");
+    }
+
+    printf("\n請按下任一鍵返回主選單...");
+    getch(); //
+}
+
+// 成績排名的函數
+void gradeRanking(Student students[], int n)
+{
+
+    // 使用泡沫排序法排序成績
+    for (int i = 0; i < n - 1; i++)
+    {
+        for (int j = 0; j < n - i - 1; j++)
+        {
+            if (students[j].average < students[j + 1].average)
+            {
+                Student temp = students[j];
+                students[j] = students[j + 1];
+                students[j + 1] = temp;
+            }
+        }
+    }
+
+    printf("成績排名，由高到低：\n\n");
+    printf("學生姓名\t學號\t平均成績\n");
+    printf("--------------------------------\n");
+
+    for (int i = 0; i < n; i++)
+    {
+        printf("%s\t\t%d\t%.1f\n", students[i].name, students[i].id, students[i].average);
+    }
+
+    printf("\n請按下任一鍵以返回主選單...");
+    pressToContinue();
+    }
+
+// 確認離開的函數
+void exitConfirmation()
+{
+    char choice;
+
+    while (1)
+    {
+        printf("\n確定離開？(Y/N)，不分大小寫：");
+        fflush(stdin);
+        scanf("%c", &choice);
+        choice = tolower(choice);
+
+        if (choice == 'y')
+        {
+            printf("\n程式即將結束。");
+            exit(0);
+        }
+        else if (choice == 'n')
+        {
+            return;
+        }
+        else
+        {
+            printf("\n無效選項，請輸入 Y 或 N，不分大小寫。\n");
+        }
+    }
+}
 //心得:
 //1.
 //這次作業相較上次簡單一些，
 //但作業還是沒辦法在實驗課上課時間內寫完的題目，
 //希望未來能力可以做到。
+
 //2.
 //在github上則學會解決一些常見問題，
 //例如
@@ -310,6 +446,7 @@ void enterStudentGrades(Student students[], int *n)
 //"error: switch 'm' requires a value"
 //"fatal: invalid gitfile format: HW4.c"
 //等等的問題。雖然也使得hash次數變得很多(因為搞出不少問題)，
+
 //3.
 //如果寫程式前腦袋可以先想好架構的話，
 //程式就可以少很多多餘的語句，若想把程式修整的更精緻，
