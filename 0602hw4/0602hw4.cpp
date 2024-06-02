@@ -11,6 +11,8 @@
 // tolower()函數(用來大寫轉小寫)
 #include <conio.h>
 // 用來使用getch()、getche()讀取鍵盤輸入
+#include <string.h>
+
 
 //以下為 預處理器
 #define MAX_STUDENTS 10
@@ -37,7 +39,7 @@ typedef struct
 
 // 預先宣告函數
 void drawPicture();   // 個人風格化頁面 可
-void checkPassword(); // 檢查密碼 可
+int checkPassword(); // 檢查密碼 可
 void pressToContinue(); //按下按鍵後清除螢幕進入下一步 可
 
 void displayChooseMenu(); // 顯示主選單的函數 OK
@@ -147,7 +149,7 @@ void drawPicture()
     printf("|_________________________/     /\n");
 }
 
-void checkPassword()
+int checkPassword()
 {
     int password;               // 儲存使用者輸入的密碼
     int correctpassword = 2024; // 儲存正確密碼
