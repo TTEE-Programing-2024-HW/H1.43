@@ -46,6 +46,7 @@ void searchStudentGrades(Student students[], int n);  // 搜尋學生成績的函數
 void gradeRanking(Student students[], int n);         // 成績排名的函數
 void displayStudentGrades(Student students[], int n); // 顯示學生成績的函數
 void exitConfirmation(); // 確認離開的函數
+void clearScreen();
 
 //「按下任何鍵繼續」，為了方便，簡化程式提升效率
 // 複習
@@ -64,7 +65,7 @@ int main(void)
     //先顯示個人風格化畫面
     //執行檢查密碼函數，若檢查完
     drawPicture();
-    // 叫不接受參數的函數不需在括號中填入 void
+    //不接受參數的函數不需在括號中填入 void
     checkPassword();
 
         while (1)
@@ -104,6 +105,12 @@ int main(void)
 
     return 0;
 }
+
+void clearScreen() //清除螢幕
+{
+    system("CLS");
+}
+
 
 
 void drawPicture()
@@ -157,13 +164,11 @@ void checkPassword()
     {
         // 如果輸入正確(2024)，按下按鍵後清除螢幕進入第二題 
         printf("歡迎:\n點擊任一按鍵進入步驟2\n");
-        void pressToContinue(); //等按下按鍵才清除螢幕進入步驟2
+        pressToContinue(); //等按下按鍵才清除螢幕進入步驟2
 		 
         fflush(stdin);
-        system("CLS");
-        //「按下任何鍵繼續」，為了方便，簡化程式提升效率
-    
-    
+        clearScreen();
+        //「按下任何鍵繼續」，為了方便，簡化程式提升效率    
     }
     else
     {
@@ -193,7 +198,7 @@ void checkPassword()
 
 void pressToContinue() //按下按鍵後清除螢幕進入下一步  
 {
-    printf("按下任一按鍵");
+    printf("按下任一按鍵進入下一步");
     getch();
 }
 
@@ -305,5 +310,8 @@ void enterStudentGrades(Student students[], int *n)
 //"error: switch 'm' requires a value"
 //"fatal: invalid gitfile format: HW4.c"
 //等等的問題。雖然也使得hash次數變得很多(因為搞出不少問題)，
-//但在deadline前，有學到東西蠻開心的。
+//3.
+//如果寫程式前腦袋可以先想好架構的話，
+//程式就可以少很多多餘的語句，若想把程式修整的更精緻，
+//勢必要花不少時間，還很怕會改了出問題。
 
